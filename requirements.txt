@@ -1,0 +1,6 @@
+ipykernel
+regex
+opencv-python
+pandas
+matplotlib
+ipywidgets
