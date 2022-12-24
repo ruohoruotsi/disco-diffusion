@@ -75,11 +75,11 @@ else:
         last_frame = len(glob(batchFolder + f"/{folder}({run})_*.png"))
         print(f'Total frames: {last_frame}')
 
-    image_path = f"{outDirPath}/{folder}/{folder}({run})_%d.png"
+    image_path = f"{outDirPath}/{folder}/{folder}({run})_%04d.png"
     filepath = f"{outDirPath}/{folder}/{folder}({run}).mp4"
 
     if (video_init_blend_mode == 'optical flow') and (animation_mode == 'Video Input'):
-        image_path = f"{outDirPath}/{folder}/flow/{folder}({run})_%d.png"
+        image_path = f"{outDirPath}/{folder}/flow/{folder}({run})_%04d.png"
         filepath = f"{outDirPath}/{folder}/{folder}({run})_flow.mp4"
         if last_frame == 'final_frame':
             last_frame = len(glob(batchFolder + f"/flow/{folder}({run})_*.png"))
@@ -102,7 +102,7 @@ else:
             warp(frame1, frame2, flo_path, blend=blend, weights_path=weights_path).save(
                 batchFolder + f"/flow/{folder}({run})_{i:04}.png")
     if video_init_blend_mode == 'linear':
-        image_path = f"{outDirPath}/{folder}/blend/{folder}({run})_%d.png"
+        image_path = f"{outDirPath}/{folder}/blend/{folder}({run})_%04d.png"
         filepath = f"{outDirPath}/{folder}/{folder}({run})_blend.mp4"
         if last_frame == 'final_frame':
             last_frame = len(glob(batchFolder + f"/blend/{folder}({run})_*.png"))
