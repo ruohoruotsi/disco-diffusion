@@ -1,33 +1,44 @@
 """
-<a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://colab.research.google.com/github/alembics/disco-diffusion/blob/main/Disco_Diffusion.ipynb"
+target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 """
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Disco Diffusion v5.61 - Now with portrait_generator_v001
 
 Disco Diffusion - http://discodiffusion.com/ , https://github.com/alembics/disco-diffusion
 
-In case of confusion, Disco is the name of this notebook edit. The diffusion model in use is Katherine Crowson's fine-tuned 512x512 model
+In case of confusion, Disco is the name of this notebook edit. 
+The diffusion model in use is Katherine Crowson's fine-tuned 512x512 model
 
-For issues, join the [Disco Diffusion Discord](https://discord.gg/msEZBy4HxA) or message us on twitter at [@somnai_dreams](https://twitter.com/somnai_dreams) or [@gandamu_ml](https://twitter.com/gandamu_ml)
-"""
+For issues, join the [Disco Diffusion Discord](https://discord.gg/msEZBy4HxA) or 
+message us on twitter at [@somnai_dreams](https://twitter.com/somnai_dreams) or 
+[@gandamu_ml](https://twitter.com/gandamu_ml)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ### Credits & Changelog ⬇️
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """
 #### Credits
 
-Original notebook by Katherine Crowson (https://github.com/crowsonkb, https://twitter.com/RiversHaveWings). It uses either OpenAI's 256x256 unconditional ImageNet or Katherine Crowson's fine-tuned 512x512 diffusion model (https://github.com/openai/guided-diffusion), together with CLIP (https://github.com/openai/CLIP) to connect text prompts with images.
+Original notebook by Katherine Crowson (https://github.com/crowsonkb, https://twitter.com/RiversHaveWings). 
+It uses either OpenAI's 256x256 unconditional ImageNet or Katherine Crowson's fine-tuned 512x512 diffusion 
+model (https://github.com/openai/guided-diffusion), together with CLIP (https://github.com/openai/CLIP) to 
+connect text prompts with images.
 
-Modified by Daniel Russell (https://github.com/russelldc, https://twitter.com/danielrussruss) to include (hopefully) optimal params for quick generations in 15-100 timesteps rather than 1000, as well as more robust augmentations.
+Modified by Daniel Russell (https://github.com/russelldc, https://twitter.com/danielrussruss) to include (hopefully) 
+optimal params for quick generations in 15-100 timesteps rather than 1000, as well as more robust augmentations.
 
-Further improvements from Dango233 and nshepperd helped improve the quality of diffusion in general, and especially so for shorter runs like this notebook aims to achieve.
+Further improvements from Dango233 and nshepperd helped improve the quality of diffusion in general, and especially 
+so for shorter runs like this notebook aims to achieve.
 
-Vark added code to load in multiple Clip models at once, which all prompts are evaluated against, which may greatly improve accuracy.
+Vark added code to load in multiple Clip models at once, which all prompts are evaluated against, which may greatly 
+improve accuracy.
 
-The latest zoom, pan, rotation, and keyframes features were taken from Chigozie Nri's VQGAN Zoom Notebook (https://github.com/chigozienri, https://twitter.com/chigozienri)
+The latest zoom, pan, rotation, and keyframes features were taken from Chigozie Nri's VQGAN Zoom Notebook 
+(https://github.com/chigozienri, https://twitter.com/chigozienri)
 
 Advanced DangoCutn Cutout method is also from Dango223.
 
@@ -35,23 +46,31 @@ Advanced DangoCutn Cutout method is also from Dango223.
 
 Disco:
 
-Somnai (https://twitter.com/Somnai_dreams) added Diffusion Animation techniques, QoL improvements and various implementations of tech and techniques, mostly listed in the changelog below.
+Somnai (https://twitter.com/Somnai_dreams) added Diffusion Animation techniques, QoL improvements and various 
+implementations of tech and techniques, mostly listed in the changelog below.
 
-3D animation implementation added by Adam Letts (https://twitter.com/gandamu_ml) in collaboration with Somnai. Creation of disco.py and ongoing maintenance.
+3D animation implementation added by Adam Letts (https://twitter.com/gandamu_ml) in collaboration with Somnai. 
+Creation of disco.py and ongoing maintenance.
 
 Turbo feature by Chris Allen (https://twitter.com/zippy731)
 
-Improvements to ability to run on local systems, Windows support, and dependency installation by HostsServer (https://twitter.com/HostsServer)
+Improvements to ability to run on local systems, Windows support, and dependency installation by HostsServer 
+(https://twitter.com/HostsServer)
 
 VR Mode by Tom Mason (https://twitter.com/nin_artificial)
 
-Horizontal and Vertical symmetry functionality by nshepperd. Symmetry transformation_steps by huemin (https://twitter.com/huemin_art). Symmetry integration into Disco Diffusion by Dmitrii Tochilkin (https://twitter.com/cut_pow).
+Horizontal and Vertical symmetry functionality by nshepperd. Symmetry transformation_steps by huemin 
+(https://twitter.com/huemin_art). Symmetry integration into Disco Diffusion by Dmitrii Tochilkin 
+(https://twitter.com/cut_pow).
 
 Warp and custom model support by Alex Spirin (https://twitter.com/devdef).
 
-Pixel Art Diffusion, Watercolor Diffusion, and Pulp SciFi Diffusion models from KaliYuga (https://twitter.com/KaliYuga_ai). Follow KaliYuga's Twitter for the latest models and for notebooks with specialized settings.
+Pixel Art Diffusion, Watercolor Diffusion, and Pulp SciFi Diffusion models from KaliYuga 
+(https://twitter.com/KaliYuga_ai). Follow KaliYuga's Twitter for the latest models and for notebooks with specialized 
+settings.
 
-Integration of OpenCLIP models and initiation of integration of KaliYuga models by Palmweaver / Chris Scalf (https://twitter.com/ChrisScalf11)
+Integration of OpenCLIP models and initiation of integration of KaliYuga models by Palmweaver / Chris Scalf 
+(https://twitter.com/ChrisScalf11)
 
 Integrated portrait_generator_v001 from Felipe3DArtist (https://twitter.com/Felipe3DArtist)
 """
@@ -153,9 +172,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #### Changelog
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 skip_for_run_all = True  # @param {type: 'boolean'}
 
@@ -164,15 +183,18 @@ if not skip_for_run_all:
         '''
   v1 Update: Oct 29th 2021 - Somnai
 
-      QoL improvements added by Somnai (@somnai_dreams), including user friendly UI, settings+prompt saving and improved google drive folder organization.
+      QoL improvements added by Somnai (@somnai_dreams), including user friendly UI, settings+prompt saving and 
+      improved google drive folder organization.
 
   v1.1 Update: Nov 13th 2021 - Somnai
 
-      Now includes sizing options, intermediate saves and fixed image prompts and perlin inits. unexposed batch option since it doesn't work
+      Now includes sizing options, intermediate saves and fixed image prompts and perlin inits. unexposed batch option 
+      since it doesn't work
 
   v2 Update: Nov 22nd 2021 - Somnai
 
-      Initial addition of Katherine Crowson's Secondary Model Method (https://colab.research.google.com/drive/1mpkrhOjoyzPeSWy2r7T8EYRaU7amYOOi#scrollTo=X5gODNAMEUCR)
+      Initial addition of Katherine Crowson's Secondary Model Method 
+      (https://colab.research.google.com/drive/1mpkrhOjoyzPeSWy2r7T8EYRaU7amYOOi#scrollTo=X5gODNAMEUCR)
 
       Noticed settings were saving with the wrong name so corrected it. Let me know if you preferred the old scheme.
 
@@ -184,7 +206,8 @@ if not skip_for_run_all:
 
       Fixed issue with NaNs resulting in black images, with massive help and testing from @Softology
 
-      Perlin now changes properly within batches (not sure where this perlin_regen code came from originally, but thank you)
+      Perlin now changes properly within batches (not sure where this perlin_regen code came from originally, 
+      but thank you)
 
   v4 Update: Jan 2022 - Somnai
 
@@ -234,11 +257,13 @@ if not skip_for_run_all:
 
       Integrated Turbo+Smooth features from Disco Diffusion Turbo -- just the implementation, without its defaults.
 
-      Implemented resume of turbo animations in such a way that it's now possible to resume from different batch folders and batch numbers.
+      Implemented resume of turbo animations in such a way that it's now possible to resume from different batch folders
+       and batch numbers.
 
       3D rotation parameter units are now degrees (rather than radians)
 
-      Corrected name collision in sampling_mode (now diffusion_sampling_mode for plms/ddim, and sampling_mode for 3D transform sampling)
+      Corrected name collision in sampling_mode (now diffusion_sampling_mode for plms/ddim, and sampling_mode for 3D 
+      transform sampling)
 
       Added video_init_seed_continuity option to make init video animations more continuous
 
@@ -287,18 +312,20 @@ if not skip_for_run_all:
     '''
     )
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Tutorial
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """
 **Diffusion settings (Defaults are heavily outdated)**
 ---
-Disco Diffusion is complex, and continually evolving with new features.  The most current documentation on on Disco Diffusion settings can be found in the unofficial guidebook:
+Disco Diffusion is complex, and continually evolving with new features.  The most current documentation on on Disco 
+Diffusion settings can be found in the unofficial guidebook:
 
 [Zippy's Disco Diffusion Cheatsheet](https://docs.google.com/document/d/1l8s7uS2dGqjztYSjPpzlmXLjl5PM3IGkRWI3IiCuK7g/edit)
 
-We also encourage users to join the [Disco Diffusion User Discord](https://discord.gg/XGZrFFCRfN) to learn from the active user community.
+We also encourage users to join the [Disco Diffusion User Discord](https://discord.gg/XGZrFFCRfN) to learn from the 
+active user community.
 
 This section below is outdated as of v2
 
@@ -314,12 +341,14 @@ Setting | Description | Default
 `sat_scale` | Controls how much saturation is allowed. From nshepperd's JAX notebook. | 0
 `cutn` | Controls how many crops to take from the image. | 16
 `cutn_batches` | Accumulate CLIP gradient from multiple batches of cuts. | 2
+
 **Init settings:**
 `init_image` | URL or local path | None
 `init_scale` | This enhances the effect of the init image, a good value is 1000 | 0
 `skip_steps` | Controls the starting point along the diffusion timesteps | 0
 `perlin_init` | Option to start with random perlin noise | False
 `perlin_mode` | ('gray', 'color') | 'mixed'
+
 **Advanced:**
 `skip_augs` | Controls whether to skip torchvision augmentations | False
 `randomize_class` | Controls whether the imagenet class is randomly changed each iteration | True
@@ -350,9 +379,9 @@ Setting | Description | Default
 `clip_models` | Models of CLIP to load. Typically the more, the better but they all come at a hefty VRAM cost. | ViT-B/32, ViT-B/16, RN50x4
 """
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 1. Set Up
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 import os
 import subprocess
 
@@ -410,59 +439,28 @@ initDirPath = f'{root_path}/init_images'
 createPath(initDirPath)
 outDirPath = f'{root_path}/images_out'
 createPath(outDirPath)
-
-if is_colab:
-    if google_drive and not save_models_to_google_drive or not google_drive:
-        model_path = '/content/models'
-        createPath(model_path)
-    if google_drive and save_models_to_google_drive:
-        model_path = f'{root_path}/models'
-        createPath(model_path)
-else:
-    model_path = f'{root_path}/models'
-    createPath(model_path)
+model_path = f'{root_path}/models'
+createPath(model_path)
 
 # @title ### 1.3 Install, import dependencies and set up runtime devices
 
 import pathlib, shutil, os, sys
 
-# There are some reports that with a T4 or V100 on Colab, downgrading to a previous version of PyTorch may be necessary.
-# .. but there are also reports that downgrading breaks them!  If you're facing issues, you may want to try uncommenting
-# and running this code.
-# nvidiasmi_output = subprocess.run(['nvidia-smi'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-# cards_requiring_downgrade = ["Tesla T4", "V100"]
-# if is_colab:
-#     if any(cardstr in nvidiasmi_output for cardstr in cards_requiring_downgrade):
-#         print("Downgrading pytorch. This can take a couple minutes ...")
-#         downgrade_pytorch_result = subprocess.run(['pip', 'install', 'torch==1.10.2', 'torchvision==0.11.3', '-q'],
-#         stdout=subprocess.PIPE).stdout.decode('utf-8')
-#         print("pytorch downgraded.")
-
 # @markdown Check this if you want to use CPU
 useCPU = False  # @param {type:"boolean"}
 
-if not is_colab:
-    # If running locally, your env will need this in order to not crash upon np.matmul() or similar operations.
-    os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+# If running locally, your env will need this in order to not crash upon np.matmul() or similar operations.
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 PROJECT_DIR = os.path.abspath(os.getcwd())
 USE_ADABINS = True
-
-if is_colab:
-    if not google_drive:
-        root_path = f'/content'
-        model_path = '/content/models'
-else:
-    root_path = os.getcwd()
-    model_path = f'{root_path}/models'
+root_path = os.getcwd()
+model_path = f'{root_path}/models'
 
 multipip_res = subprocess.run(
     ['pip', 'install', 'lpips', 'datetime', 'timm', 'ftfy', 'einops', 'pytorch-lightning', 'omegaconf'],
     stdout=subprocess.PIPE).stdout.decode('utf-8')
 print(multipip_res)
-
-if is_colab:
-    subprocess.run(['apt', 'install', 'imagemagick'], stdout=subprocess.PIPE).stdout.decode('utf-8')
 
 try:
     from CLIP import clip
@@ -570,10 +568,7 @@ from functools import partial
 import argparse, PIL, cv2
 from PIL import Image
 
-if is_colab:
-    os.chdir('/content')
-else:
-    os.chdir(f'{PROJECT_DIR}')
+os.chdir(f'{PROJECT_DIR}')
 import warnings
 
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -1771,9 +1766,9 @@ class SecondaryDiffusionImageNet2(nn.Module):
 
 
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 2. Diffusion and CLIP model settings
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # !!   "id": "ModelSettings"
 # @markdown ####**Models Settings (note: For pixel art, the best is pixelartdiffusion_expanded):**
 diffusion_model = "512x512_diffusion_uncond_finetune_008100"  # @param ["256x256_diffusion_uncond", "512x512_diffusion_uncond_finetune_008100", "portrait_generator_v001", "pixelartdiffusion_expanded", "pixel_art_diffusion_hard_256", "pixel_art_diffusion_soft_256", "pixelartdiffusion4k", "watercolordiffusion_2", "watercolordiffusion", "PulpSciFiDiffusion", "custom"]
@@ -1789,7 +1784,7 @@ ViTB32 = True  # @param{type:"boolean"}
 ViTB16 = True  # @param{type:"boolean"}
 ViTL14 = False  # @param{type:"boolean"}
 ViTL14_336px = False  # @param{type:"boolean"}
-RN101 = False  # @param{type:"boolean"}
+RN101 = True  # @param{type:"boolean"}
 RN50 = True  # @param{type:"boolean"}
 RN50x4 = False  # @param{type:"boolean"}
 RN50x16 = False  # @param{type:"boolean"}
@@ -2029,10 +2024,10 @@ normalize = T.Normalize(mean=[0.48145466, 0.4578275, 0.40821073], std=[0.2686295
 lpips_model = lpips.LPIPS(net='vgg').to(device)
 
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Custom model settings 
 Modify in accordance with your training settings and run the cell
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # @markdown ####**Custom Model Settings:**
 if diffusion_model == 'custom':
     model_config.update({
@@ -2057,8 +2052,8 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Koi-animation'  # @param{type: 'string'}
-steps = 500  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
+batch_name = 'Koi-animation-02'  # @param{type: 'string'}
+steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
 clip_guidance_scale = 5000  # @param{type: 'number'}
 tv_scale = 150  # @param{type: 'number'}
@@ -2090,8 +2085,8 @@ skip_steps = 10  # @param{type: 'integer'}
 width_height = width_height_for_256x256_models if diffusion_model in diffusion_models_256x256_list else width_height_for_512x512_models
 
 # Get corrected sizes
-side_x = (width_height[0] // 64) * 64;
-side_y = (width_height[1] // 64) * 64;
+side_x = (width_height[0] // 64) * 64
+side_y = (width_height[1] // 64) * 64
 if side_x != width_height[0] or side_y != width_height[1]:
     print(f'Changing output size to {side_x}x{side_y}. Dimensions must by multiples of 64.')
 
@@ -2103,9 +2098,9 @@ createPath(batchFolder)
 # !! {"metadata":{
 # !!   "id": "AnimSetTop"
 # !! }}
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ### Animation Settings
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # @markdown ####**Animation Mode:**
 animation_mode = '2D'  # @param ['None', '2D', '3D', 'Video Input'] {type:'string'}
@@ -2160,10 +2155,10 @@ if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
 
 interp_spline = 'Linear'  # Do not change, currently will not look good. param ['Linear','Quadratic','Cubic']{type:"string"}
-angle = "0:(0)"  # @param {type:"string"}
-zoom = "0: (3.0), 12: (3.0), 24: (0)"  # @param {type:"string"}
-translation_x = "0: (0)"  # @param {type:"string"}
-translation_y = "0: (0)"  # @param {type:"string"}
+angle = "0: (3.0), 12: (3.0), 24: (0)"    # @param {type:"string"} # in degrees
+zoom = "0:(1), 12: (1), 24: (1.05), 36: (1.05), 48: (1)"  # @param {type:"string"} # zoom factor 1.x
+translation_x = "0: (0), 48: (0), 60: (5), 72: (5), 84: (0)"  # @param {type:"string"}
+translation_y = "0: (0), 84: (0), 96: (-5), 108: (-5), 120(0)"  # @param {type:"string"}
 translation_z = "0: (10.0)"  # @param {type:"string"}
 rotation_3d_x = "0: (0)"  # @param {type:"string"}
 rotation_3d_y = "0: (0)"  # @param {type:"string"}
@@ -2199,8 +2194,9 @@ if turbo_mode and animation_mode != '3D':
 # @markdown ####**Coherency Settings:**
 # @markdown `frame_scale` tries to guide the new frame to looking like the old one. A good default is 1500.
 frames_scale = 1500  # @param{type: 'integer'}
-# @markdown `frame_skip_steps` will blur the previous frame - higher values will flicker less but struggle to add enough new detail to zoom into.
-frames_skip_steps = '60%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
+# @markdown `frame_skip_steps` will blur the previous frame - higher values will flicker less but struggle to add
+# enough new detail to zoom into.
+frames_skip_steps = '50%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
 
 # @markdown ####**Video Init Coherency Settings:**
 # @markdown `frame_scale` tries to guide the new frame to looking like the old one. A good default is 1500.
@@ -2714,10 +2710,10 @@ if animation_mode == "Video Input":
                 gc.collect()
 
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ### Extra Settings
  Partial Saves, Advanced Settings, Cutn Scheduling
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 intermediate_saves = 0  # @param{type: 'raw'}
 intermediates_in_subfolder = True  # @param{type: 'boolean'}
@@ -2803,12 +2799,15 @@ use_vertical_symmetry = False  # @param {type:"boolean"}
 use_horizontal_symmetry = False  # @param {type:"boolean"}
 transformation_percent = [0.09]  # @param
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ### Prompts
-`animation_mode: None` will only use the first set. `animation_mode: 2D / Video` will run through them per the set frames and hold on the last one.
-"""
+`animation_mode: None` will only use the first set. 
+`animation_mode: 2D / Video` will run through them per the set frames and hold on the last one.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# Note: If using a pixelart diffusion model, try adding "#pixelart" to the end of the prompt for a stronger effect. It'll tend to work a lot better!
+# Note: If using a pixelart diffusion model,
+# try adding "#pixelart" to the end of the prompt for a stronger effect.
+# It'll tend to work a lot better!
 text_prompts = {
     0: ["A beautiful painting of many Koi fish in red and black, Trending on artstation."],
     60: ["A beautiful painting of a single Koi fish in orange and white, Trending on artstation"],
@@ -2818,9 +2817,9 @@ image_prompts = {
     # 0:['ImagePromptsWorkButArentVeryGood.png:2',],
 }
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 4. Diffuse!
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # @title Do the Run!
 # @markdown `n_batches` ignored with animation modes.
@@ -3051,9 +3050,9 @@ finally:
     gc.collect()
     torch.cuda.empty_cache()
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # 5. Create the video
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 import PIL
 # @title ### **Create video**
