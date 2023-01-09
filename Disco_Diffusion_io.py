@@ -2052,14 +2052,14 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Koi-animation-02'  # @param{type: 'string'}
-steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
+batch_name = 'Trolls-animation-04-steps-100-cutn_batches-1-init-image'  # @param{type: 'string'}
+steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
 clip_guidance_scale = 5000  # @param{type: 'number'}
 tv_scale = 150  # @param{type: 'number'}
 range_scale = 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
-cutn_batches = 4  # @param{type: 'number'}
+cutn_batches = 1  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
 skip_augs = False  # @param{type: 'boolean'}
 
 # @markdown ####**Image dimensions to be used for 256x256 models (e.g. pixelart models):**
@@ -2077,9 +2077,9 @@ video_init_skip_steps = 50  # @param{type: 'integer'}
 # @markdown ---
 
 # @markdown ####**Init Image Settings:**
-init_image = None  # @param{type: 'string'}
+init_image = "/home/bizon/github/disco-diffusion/images_out/Trolls-animation-03-steps-100-cutn_batches-1/Trolls-animation-03-steps-100-cutn_batches-1(0)_0181.png" # None  # @param{type: 'string'}
 init_scale = 1000  # @param{type: 'integer'}
-skip_steps = 10  # @param{type: 'integer'}
+skip_steps = 50  # @param{type: 'integer'}
 # @markdown *Make sure you set skip_steps to ~50% of your steps if you want to use an init image.*
 
 width_height = width_height_for_256x256_models if diffusion_model in diffusion_models_256x256_list else width_height_for_512x512_models
@@ -2149,16 +2149,16 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 120  # @param {type:"number"}
+max_frames = 600  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
 
 interp_spline = 'Linear'  # Do not change, currently will not look good. param ['Linear','Quadratic','Cubic']{type:"string"}
-angle = "0: (3.0), 12: (3.0), 24: (0)"    # @param {type:"string"} # in degrees
-zoom = "0:(1), 12: (1), 24: (1.05), 36: (1.05), 48: (1)"  # @param {type:"string"} # zoom factor 1.x
-translation_x = "0: (0), 48: (0), 60: (5), 72: (5), 84: (0)"  # @param {type:"string"}
-translation_y = "0: (0), 84: (0), 96: (-5), 108: (-5), 120(0)"  # @param {type:"string"}
+angle = "0: (1)"    # @param {type:"string"} # in degrees
+zoom = "0:(1.02), "  # @param {type:"string"} # zoom factor 1.x
+translation_x = "0: (0)" # "0: (0), 48: (0), 60: (5), 72: (5), 84: (0)"  # @param {type:"string"}
+translation_y = "0: (0)" # "0: (0), 84: (0), 96: (-5), 108: (-5), 120(0)"  # @param {type:"string"}
 translation_z = "0: (10.0)"  # @param {type:"string"}
 rotation_3d_x = "0: (0)"  # @param {type:"string"}
 rotation_3d_y = "0: (0)"  # @param {type:"string"}
@@ -2809,8 +2809,62 @@ transformation_percent = [0.09]  # @param
 # try adding "#pixelart" to the end of the prompt for a stronger effect.
 # It'll tend to work a lot better!
 text_prompts = {
-    0: ["A beautiful painting of many Koi fish in red and black, Trending on artstation."],
-    60: ["A beautiful painting of a single Koi fish in orange and white, Trending on artstation"],
+    0: [
+        "A beautiful painting of a cozy mountain cave under a starry night sky:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-10",
+        "people:-10"
+    ],
+    60: [
+        "A beautiful painting of a lonely troll looking out from a mountain cave opening:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-10"
+    ],
+    120: [
+        "A beautiful painting of a troll's mountain cave:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    180: [
+        "A beautiful painting of many trolls walking in a glen:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    240: [
+        "A beautiful painting of many trolls walking in a pasture:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    300: [
+        "A beautiful painting of a single troll swimming in a lake:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    360: [
+        "A beautiful painting of a troll's building in a serene landscape:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    420: [
+        "A beautiful painting of a troll's building in a serene landscape:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    480: [
+        "A beautiful painting of a troll's building in a serene landscape:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    540: [
+        "A beautiful painting of a troll's building in a serene landscape:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ],
+    600: [
+        "A beautiful painting of a troll's building in a serene landscape:2",
+        "Aaah!!! Real Monsters, Artstation",
+        "text:-10",
+    ]
 }
 
 image_prompts = {
