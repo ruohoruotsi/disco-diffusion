@@ -2052,7 +2052,7 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Trolls-animation-04-steps-100-cutn_batches-1-init-image'  # @param{type: 'string'}
+batch_name = 'Trolls-animation-06-steps-100-cn_b-1-init-image-660-f-same-seed'  # @param{type: 'string'}
 steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
 clip_guidance_scale = 5000  # @param{type: 'number'}
@@ -2149,7 +2149,7 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 600  # @param {type:"number"}
+max_frames = 660  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
@@ -2747,7 +2747,7 @@ if intermediate_saves and intermediates_in_subfolder is True:
 
 perlin_init = False  # @param{type: 'boolean'}
 perlin_mode = 'mixed'  # @param ['mixed', 'color', 'gray']
-set_seed = 'random_seed'  # @param{type: 'string'}
+set_seed = '3562262349' #'random_seed'  # @param{type: 'string'}
 eta = 0.8  # @param{type: 'number'}
 clamp_grad = True  # @param{type: 'boolean'}
 clamp_max = 0.05  # @param{type: 'number'}
@@ -2836,33 +2836,38 @@ text_prompts = {
         "text:-10",
     ],
     300: [
-        "A beautiful painting of a single troll swimming in a lake:2",
+        "A beautiful painting of a single troll swimming in a lake under a starry night sky:2",
         "Aaah!!! Real Monsters, Artstation",
         "text:-10",
     ],
     360: [
-        "A beautiful painting of a troll's building in a serene landscape:2",
+        "A beautiful painting of a troll's building in a serene landscap under a starry night sky:2",
         "Aaah!!! Real Monsters, Artstation",
         "text:-10",
     ],
     420: [
-        "A beautiful painting of a troll's building in a serene landscape:2",
-        "Aaah!!! Real Monsters, Artstation",
+        "A beautiful painting of a creatures walking through a boreal forest:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
         "text:-10",
     ],
     480: [
-        "A beautiful painting of a troll's building in a serene landscape:2",
-        "Aaah!!! Real Monsters, Artstation",
+        "A beautiful painting of a medieval castle high up on a cliff:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
         "text:-10",
     ],
     540: [
-        "A beautiful painting of a troll's building in a serene landscape:2",
-        "Aaah!!! Real Monsters, Artstation",
+        "A cyberpunk bladerunner troll:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
         "text:-10",
     ],
     600: [
-        "A beautiful painting of a troll's building in a serene landscape:2",
-        "Aaah!!! Real Monsters, Artstation",
+        "A cyberpunk bladerunner troll:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-10",
+    ],
+    660: [
+        "A cyberpunk bladerunner troll:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
         "text:-10",
     ]
 }
