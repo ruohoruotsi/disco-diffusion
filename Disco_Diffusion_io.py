@@ -2052,14 +2052,14 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Trolls-animation-06-steps-100-cn_b-1-init-image-660-f-same-seed'  # @param{type: 'string'}
+batch_name = 'Trolls-animation-15-steps-100-cn_b-2-660-f-seed-3D-turbo-BLACK-TROLL-FOREST'  # @param{type: 'string'}
 steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
 clip_guidance_scale = 5000  # @param{type: 'number'}
 tv_scale = 150  # @param{type: 'number'}
 range_scale = 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
-cutn_batches = 1  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
+cutn_batches = 2  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
 skip_augs = False  # @param{type: 'boolean'}
 
 # @markdown ####**Image dimensions to be used for 256x256 models (e.g. pixelart models):**
@@ -2076,8 +2076,9 @@ video_init_skip_steps = 50  # @param{type: 'integer'}
 
 # @markdown ---
 
+# IOHAVOC -- "starry night" init image doesn't work well with 3D AFAICT, works gr
 # @markdown ####**Init Image Settings:**
-init_image = "/home/bizon/github/disco-diffusion/images_out/Trolls-animation-03-steps-100-cutn_batches-1/Trolls-animation-03-steps-100-cutn_batches-1(0)_0181.png" # None  # @param{type: 'string'}
+init_image = None # "/home/bizon/github/disco-diffusion/images_out/Trolls-animation-03-steps-100-cutn_batches-1/Trolls-animation-03-steps-100-cutn_batches-1(0)_0181.png" # None  # @param{type: 'string'}
 init_scale = 1000  # @param{type: 'integer'}
 skip_steps = 50  # @param{type: 'integer'}
 # @markdown *Make sure you set skip_steps to ~50% of your steps if you want to use an init image.*
@@ -2103,7 +2104,7 @@ createPath(batchFolder)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # @markdown ####**Animation Mode:**
-animation_mode = '2D'  # @param ['None', '2D', '3D', 'Video Input'] {type:'string'}
+animation_mode = '3D'  # @param ['None', '2D', '3D', 'Video Input'] {type:'string'}
 # @markdown *For animation, you probably want to turn `cutn_batches` to 1 to make it quicker.*
 
 
@@ -2156,7 +2157,7 @@ if animation_mode == "Video Input":
 
 interp_spline = 'Linear'  # Do not change, currently will not look good. param ['Linear','Quadratic','Cubic']{type:"string"}
 angle = "0: (1)"    # @param {type:"string"} # in degrees
-zoom = "0:(1.02), "  # @param {type:"string"} # zoom factor 1.x
+zoom = "0:(1.01), "  # @param {type:"string"} # zoom factor 1.x
 translation_x = "0: (0)" # "0: (0), 48: (0), 60: (5), 72: (5), 84: (0)"  # @param {type:"string"}
 translation_y = "0: (0)" # "0: (0), 84: (0), 96: (-5), 108: (-5), 120(0)"  # @param {type:"string"}
 translation_z = "0: (10.0)"  # @param {type:"string"}
@@ -2178,7 +2179,7 @@ sampling_mode = 'bicubic'  # @param {type:"string"}
 # @markdown Speeds up rendering by 2x-4x, and may improve image coherence between frames.
 # @markdown For different settings tuned for Turbo Mode, refer to the original Disco-Turbo Github: https://github.com/zippy731/disco-diffusion-turbo
 
-turbo_mode = False  # @param {type:"boolean"}
+turbo_mode = True  # @param {type:"boolean"}
 turbo_steps = "3"  # @param ["2","3","4","5","6"] {type:"string"}
 turbo_preroll = 10  # frames
 
@@ -2747,7 +2748,7 @@ if intermediate_saves and intermediates_in_subfolder is True:
 
 perlin_init = False  # @param{type: 'boolean'}
 perlin_mode = 'mixed'  # @param ['mixed', 'color', 'gray']
-set_seed = '3562262349' #'random_seed'  # @param{type: 'string'}
+set_seed = 'random_seed'  # @param{type: 'string'} # '3562262349'
 eta = 0.8  # @param{type: 'number'}
 clamp_grad = True  # @param{type: 'boolean'}
 clamp_max = 0.05  # @param{type: 'number'}
@@ -2810,66 +2811,21 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "A beautiful painting of a cozy mountain cave under a starry night sky:2",
-        "Thomas Kinkade, Artstation, Unreal Engine",
+        "A dark, forest landscape at night, serene:20",
+        "Black and white, tintype:10",
         "text:-10",
         "people:-10"
     ],
-    60: [
-        "A beautiful painting of a lonely troll looking out from a mountain cave opening:2",
-        "Thomas Kinkade, Artstation, Unreal Engine",
-        "text:-10"
-    ],
-    120: [
-        "A beautiful painting of a troll's mountain cave:2",
-        "Aaah!!! Real Monsters, Artstation",
+    200: [
+        "A troll walking in a dark, forest landscape at night:20",
+        "Black and white, tintype:10",
         "text:-10",
     ],
-    180: [
-        "A beautiful painting of many trolls walking in a glen:2",
-        "Aaah!!! Real Monsters, Artstation",
+    550: [
+        "A dark, forest landscape at night:20",
+        "Black and white, dark academia:10",
         "text:-10",
     ],
-    240: [
-        "A beautiful painting of many trolls walking in a pasture:2",
-        "Aaah!!! Real Monsters, Artstation",
-        "text:-10",
-    ],
-    300: [
-        "A beautiful painting of a single troll swimming in a lake under a starry night sky:2",
-        "Aaah!!! Real Monsters, Artstation",
-        "text:-10",
-    ],
-    360: [
-        "A beautiful painting of a troll's building in a serene landscap under a starry night sky:2",
-        "Aaah!!! Real Monsters, Artstation",
-        "text:-10",
-    ],
-    420: [
-        "A beautiful painting of a creatures walking through a boreal forest:2",
-        "Thomas Kinkade, Artstation, Unreal Engine",
-        "text:-10",
-    ],
-    480: [
-        "A beautiful painting of a medieval castle high up on a cliff:2",
-        "Thomas Kinkade, Artstation, Unreal Engine",
-        "text:-10",
-    ],
-    540: [
-        "A cyberpunk bladerunner troll:2",
-        "Thomas Kinkade, Artstation, Unreal Engine",
-        "text:-10",
-    ],
-    600: [
-        "A cyberpunk bladerunner troll:2",
-        "Thomas Kinkade, Artstation, Unreal Engine",
-        "text:-10",
-    ],
-    660: [
-        "A cyberpunk bladerunner troll:2",
-        "Thomas Kinkade, Artstation, Unreal Engine",
-        "text:-10",
-    ]
 }
 
 image_prompts = {
