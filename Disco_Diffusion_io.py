@@ -2052,12 +2052,12 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Trolls-animation-15-steps-100-cn_b-2-660-f-seed-3D-turbo-BLACK-TROLL-FOREST'  # @param{type: 'string'}
-steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
+batch_name = 'Canvas-repro-01-steps-250-cn_b-2-5000-3D-turbo'  # @param{type: 'string'}
+steps = 250  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
-clip_guidance_scale = 5000  # @param{type: 'number'}
-tv_scale = 150  # @param{type: 'number'}
-range_scale = 150  # @param{type: 'number'}
+clip_guidance_scale = 85000 # 5000  # @param{type: 'number'}
+tv_scale = 1 # 150  # @param{type: 'number'}
+range_scale = 450 # 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
 cutn_batches = 2  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
 skip_augs = False  # @param{type: 'boolean'}
@@ -2150,7 +2150,7 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 660  # @param {type:"number"}
+max_frames = 5000  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
@@ -2158,12 +2158,12 @@ if animation_mode == "Video Input":
 interp_spline = 'Linear'  # Do not change, currently will not look good. param ['Linear','Quadratic','Cubic']{type:"string"}
 angle = "0: (1)"    # @param {type:"string"} # in degrees
 zoom = "0:(1.01), "  # @param {type:"string"} # zoom factor 1.x
-translation_x = "0: (0)" # "0: (0), 48: (0), 60: (5), 72: (5), 84: (0)"  # @param {type:"string"}
-translation_y = "0: (0)" # "0: (0), 84: (0), 96: (-5), 108: (-5), 120(0)"  # @param {type:"string"}
-translation_z = "0: (10.0)"  # @param {type:"string"}
-rotation_3d_x = "0: (0)"  # @param {type:"string"}
-rotation_3d_y = "0: (0)"  # @param {type:"string"}
-rotation_3d_z = "0: (0)"  # @param {type:"string"}
+translation_x = "0:(0),70:(0),71:(3.5),106:(0),141:(0),142:(-3.5),179:(0),213:(0),214:(3.5),250:(0),285:(0),286:(-3.5),322:(0),1666:(0),1667:(6),1675:(3),1676:(0),1809:(0),1810:(-6),1818:(-3),1819:(0),1953:(0),1954:(6),1962:(3),1963:(0),3949:(0),3950:(-6),3956:(-3),3957:(0),4091:(0),4092:(6),4099:(3),4100:(0),4234:(0),4235:(-6),4242:(-3),4243:(0)"
+translation_y = "0:(0),36:(0),37:(3.5),71:(0),105:(0),106:(-3.5),142:(0),178:(0),179:(3.5),214:(0),249:(0),250:(-3.5),286:(0),1523:(0),1524:(4),1533:(8),1534:(0),1882:(0),1882:(-4),1888:(-8),1889:(0),3806:(0),3807:(8),3814:(4),3815:(0),4161:(0),4162:(-8),4170:(-4),4171:(0)"
+translation_z =  "0:(0),18:(0),37:(2.5),257:(1),322:(3.5),1425:(4),1444:(5),1453:(-6.5),1462:(5),2033:(5),2130:(4),2569:(3.5),2602:(0),2674:(-2),2889:(-2.2),3137:(-2.2),3173:(-2),3602:(-2.5),3709:(-3.5),3741:(-5),3885:(-5),3886:(8),3895:(0),3904:(-5),4313:(-4),4351:(0)"
+rotation_3d_x = "0:(0),321:(0),322:(0.007),892:(0.007),926:(-0.01),962:(0.01),998:(-0.01),1034:(0.01),1069:(-0.01),1105:(0.01),1140:(-0.01)),1176:(0.01),1212:(-0.01)),1247:(0.01),1282:(-0.01)),1319:(0.01),1354:(-0.01)),1389:(0.01),1425:(-0.01)),1461:(0)"
+rotation_3d_y = "0:(0),1461:(0),1462:(0.01),1532:(0.01),1533:(-0.01),1604:(-0.01),1605:(0.01),1675:(0.01),1676:(-0.01),1747:(-0.01),1748:(0.01),1818:(0.01),1819:(-0.01),1889:(-0.01),1889:(0.01),1960:(0.01),1961:(-0.01),2032:(-0.01),2033:(0)"
+rotation_3d_z = "0:(0),1603:(0),1604:(0.03),1622:(0.03),1623:(0),3743:(0),3744:(-0.01),3814:(-0.01),3815:(0.01),3885:(0.01),3886:(0),3903:(0),3904:(-0.01),3957:(-0.01),3958:(0.01),4028:(0.01),4029:(-0.01),4098:(-0.01),4099:(0.01),4170:(0.01),4171:(-0.01),4241:(-0.01),4242:(0.01),4312:(0.01),4313:(0)"
 midas_depth_model = "dpt_large"  # @param {type:"string"}
 midas_weight = 0.3  # @param {type:"number"}
 near_plane = 200  # @param {type:"number"}
@@ -2811,21 +2811,330 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "A dark, forest landscape at night, serene:20",
-        "Black and white, tintype:10",
-        "text:-10",
-        "people:-10"
+        "A cozy cottage under a starry night sky:2",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-1",
+        "people:-1"
     ],
-    200: [
-        "A troll walking in a dark, forest landscape at night:20",
-        "Black and white, tintype:10",
-        "text:-10",
+    80: [
+        "An artist painting his life onto a canvas by candlelight",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-1"
     ],
-    550: [
-        "A dark, forest landscape at night:20",
-        "Black and white, dark academia:10",
-        "text:-10",
+    142: [
+        "A lonely artist surrounded by picture frames of family",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-1"
     ],
+    192: [
+        "Having strange feelings in your head",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-1"
+    ],
+    229: [
+        "A beautiful view of the countryside from prison cell bars",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-1"
+    ],
+    267: [
+        "I fear the time on the clock",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-1"
+    ],
+    322: [
+        "I fear the time on the clock",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "bright and warm color scheme",
+        "text:-1"
+    ],
+    338: [
+        "A married couple arguing on a hilltop",
+        "Artstation, Unreal Engine",
+        "bright and warm color scheme",
+        "text:-1"
+    ],
+    375: [
+        "An independent woman drives away in a car",
+        "Artstation, Unreal Engine",
+        "bright and warm color scheme",
+        "text:-1"
+    ],
+    423: [
+        "Twiddling thumbs and magic clouds erupting from a brain",
+        "Artstation, Unreal Engine",
+        "bright and warm color scheme",
+        "text:-1"
+    ],
+    532: [
+        "Stuck inside prison cell, but you're still eighteen",
+        "Artstation, Unreal Engine",
+        "daytime light",
+        "text:-1"
+    ],
+    608: [
+        "it seems to be, and I'll tell you who's overrated",
+        "Artstation, Unreal Engine",
+        "bright and warm color scheme",
+        "text:-1"
+    ],
+    710: [
+        "A beautiful person with some hideous dreams",
+        "Artstation, Unreal Engine",
+        "bright and warm color scheme",
+        "text:-1"
+    ],
+    799: [
+        "Rays of light come through a cloudy sky as a silver lining",
+        "Artstation, Unreal Engine",
+        "bright and warm color scheme",
+        "text:-1"
+    ],
+    853: [
+        "A lone car driving down the hideway on the side of the road towards home",
+        "Artstation, Unreal Engine",
+        "daytime light",
+        "text:-1"
+    ],
+    892: [
+        "A lone car driving down the hideway on the side of the road towards home",
+        "acrylic painting style",
+        "text:-1"
+    ],
+    943: [
+        "Weights on the edge of a cliff",
+        "acrylic painting style trending on artstation",
+        "text:-1"
+    ],
+    996: [
+        "Read about your life on your local newspaper",
+        "acrylic painting style trending on artstation"
+    ],
+    1062: [
+        "Realize the end of us is getting near",
+        "acrylic painting style trending on artstation",
+        "text:-1"
+    ],
+    1136: [
+        "Droplets of paint trickling off a canvas",
+        "acrylic painting style trending on artstation",
+        "text:-1"
+    ],
+    1177: [
+        "Delirious illusions flowing backwards through the river of color, While we analyze it to try see it clearer",
+        "detailed oil painting trending on artstation",
+        "text:-1"
+    ],
+    1250: [
+        "A lonely prisoner",
+        "detailed oil painting trending on artstation",
+        "text:-1"
+    ],
+    1298: [
+        "Now what's your vision?",
+        "detailed oil painting trending on artstation",
+        "text:-1"
+    ],
+    1319: [
+        "Initiate your shading, blend the universe together in time, it only gets a little easier",
+        "detailed oil painting trending on artstation",
+        "text:-1"
+    ],
+    1389: [
+        "Suddenly piece yourself back together now",
+        "detailed oil painting trending on artstation",
+        "text:-1"
+    ],
+    1441: [
+        "What's your vision?",
+        "detailed oil painting trending on artstation",
+        "text:-1"
+    ],
+    1461: [
+        "The universe exploding into reflective shards within a snowglobe",
+        "unreal engine",
+        "chromatic aberration effect",
+        "text:-1"
+    ],
+    1534: [
+        "A giant eyeball looking straight at you in the woods",
+        "depth of field",
+        "hyperrealistic",
+        "text:-1"
+    ],
+    1604: [
+        "Planet earth viewed from outer space while an asteriod flies by",
+        "bright color scheme",
+        "raytracing",
+        "shaders",
+        "text:-1"
+    ],
+    1676: [
+        "Mirror exploding into reflective shards of glass over a reflective pond",
+        "godrays",
+        "glitch",
+        "hyperrealistic",
+        "text:-1"
+    ],
+    1748: [
+        "Sound system schematics",
+        "drawn by leonardo da vinci",
+        "photoshop",
+        "4k",
+        "text:-1"
+    ],
+    1819: [
+        "Steampunk sewer overflows with technology",
+        "in Star Wars style",
+        "bright color scheme",
+        "text:-1"
+    ],
+    1890: [
+        "Inside an audio factory producing giant subwoofers",
+        "photorealistic",
+        "dof",
+        "text:-1"
+    ],
+    2033: [
+        "Paintbrushes organized by color inside an artist's studio",
+        "lofi",
+        "unreal engine",
+        "text:-1"
+    ],
+    2176: [
+        "Blank canvases inside an art museum",
+        "lofi",
+        "unreal engine",
+        "text:-1"
+    ],
+    2318: [
+        "Spilling buckets of colorful paint against gravity in space",
+        "lofi",
+        "unreal engine",
+        "text:-1"
+    ],
+    2461: [
+        "Tears of paint dripping onto a blank white canvas in heaven",
+        "lofi",
+        "unreal engine",
+        "text:-1"
+    ],
+    2603: [
+        "Tears of paint dripping onto a blank white canvas in heaven",
+        "graphite drawing"
+    ],
+    2630: [
+        "And I don't wanna have to give a damn about you",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    2718: [
+        "Or your inhibitions",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    2770: [
+        "After all, you're the one who taught me love",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    2848: [
+        "Was not for everybody",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    2913: [
+        "However, I'm starting to see this world in the right light",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    3004: [
+        "Yet it still gets darker",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    3060: [
+        "You see, it's just a simple symphony",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    3130: [
+        "Or a painting, whatever",
+        "graphite drawing in notebook",
+        "trending on artstation"
+    ],
+    3195: [
+        "This unnatural path, it spans infinitely",
+        "beautiful daytime painting trending on artstation"
+    ],
+    3288: [
+        "Planet earth crumbling into smaller pieces",
+        "beautiful painting trending on artstation"
+    ],
+    3340: [
+        "The ground collapsing into an abyss",
+        "beautiful painting trending on artstation"
+    ],
+    3419: [
+        "In the midst of summer it won't exist",
+        "serene painting trending on artstation"
+    ],
+    3491: [
+        "This emptiness, it's just a blank slate",
+        "beautiful painting trending on artstation"
+    ],
+    3562: [
+        "A painter to interferes with the chaos",
+        "beautiful painting trending on artstation"
+    ],
+    3623: [
+        "It's quite complex",
+        "beautiful painting trending on artstation"
+    ],
+    3657: [
+        "But what do I know?",
+        "beautiful painting trending on artstation"
+    ],
+    3742: [
+        "High tech dragonflies in an electric rainforest",
+        "daytime light, Sci-fi",
+        "bright color scheme",
+        "text:-1"
+    ],
+    3816: [
+        "Magestic beast stands in post-apocalyptic city",
+        "cinematic effect, Unreal Engine",
+        "text:-1"
+    ],
+    3886: [
+        "Spaceship flying through the clouds",
+        "Sci-fi, by Bruce Pennington, Artstation",
+        "text:-1"
+    ],
+    3958: [
+        "Nuclear reactor malfunction inside power plant",
+        "Octane 3D render, Unreal Engine",
+        "text:-1"
+    ],
+    4101: [
+        "Floating islands of beautiful green flower fields",
+        "Sci-fi, by Bruce Pennington, Artstation",
+        "text:-1"
+    ],
+    4172: [
+        "Love bursting out from your heart in a pink color scheme",
+        "impressionism",
+        "text:-1"
+    ],
+    4243: [
+        "Inside the brain of artificial intelligence",
+        "Thomas Kinkade, Artstation, Unreal Engine",
+        "text:-1"
+    ],
+    4315: [
+        "A blank painting canvas in an artist's workshop",
+        "trending on artstation",
+        "text:-1"
+    ]
 }
 
 image_prompts = {
