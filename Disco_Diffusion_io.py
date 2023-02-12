@@ -2052,10 +2052,10 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Canvas-graphite-style-steps-100-cn_b-4-5000-3D-turbo-V9-SHE-INIT'  # @param{type: 'string'}
+batch_name = 'Cameroon-steps-100-cn_b-4-5000-3D-turbo-004-INIT'  # @param{type: 'string'}
 steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
-clip_guidance_scale = 5000 # 85000 # 5000  # @param{type: 'number'}
+clip_guidance_scale = 5000 # 85000  # @param{type: 'number'}
 tv_scale = 150 # 1, 150  # @param{type: 'number'}
 range_scale = 450 # 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
@@ -2078,7 +2078,7 @@ video_init_skip_steps = 50  # @param{type: 'integer'}
 
 # IOHAVOC -- "starry night" init image doesn't work well with 3D AFAICT, works gr
 # @markdown ####**Init Image Settings:**
-init_image = "/home/bizon/github/disco-diffusion/init_images/Canvas-graphite-style-steps-200-cn_b-4-5000-3D-turbo-V6-SHE_0472.png" # None  # @param{type: 'string'}
+init_image = "/home/bizon/github/disco-diffusion/init_images/cameroun_border_01.png" # None  # @param{type: 'string'}
 init_scale = 1000  # @param{type: 'integer'}
 skip_steps = 50  # @param{type: 'integer'}
 # @markdown *Make sure you set skip_steps to ~50% of your steps if you want to use an init image.*
@@ -2150,7 +2150,7 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 620  # @param {type:"number"}
+max_frames = 300  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
@@ -2811,24 +2811,42 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "I realize, it was only my time",
-        "graphite drawing",
-        "trending on artstation",
+        "Driving on a long forested road, in cameroon",
         "text:-1"
-    ],
-    100: [
-        "And I don't wanna have to give a damn about you",
-        "graphite drawing in notebook",
-        "trending on artstation",
-        "text:-1"
-    ],
-    200: [
-        "Or your inhibitions",
-        "graphite drawing in notebook",
-        "trending on artstation",
-        "text:-1"
-    ],
+    ]
 }
+
+# 0: [
+#     "However, I'm starting to see this world in the right light",
+#     "graphite drawing in notebook",
+#     "trending on artstation"
+# ],
+# 00: [
+#     "Yet it still gets darker",
+#     "graphite drawing in notebook",
+#     "trending on artstation"
+# ],
+
+# text_prompts = {
+#     0: [
+#         "I realize, it was only my time",
+#         "graphite drawing",
+#         "trending on artstation",
+#         "text:-1"
+#     ],
+#     100: [
+#         "And I don't wanna have to give a damn about you",
+#         "graphite drawing in notebook",
+#         "trending on artstation",
+#         "text:-1"
+#     ],
+#     200: [
+#         "Or your inhibitions",
+#         "graphite drawing in notebook",
+#         "trending on artstation",
+#         "text:-1"
+#     ]
+# }
 
 image_prompts = {
     # 0:['ImagePromptsWorkButArentVeryGood.png:2',],
