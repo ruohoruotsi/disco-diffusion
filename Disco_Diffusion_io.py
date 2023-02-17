@@ -2052,10 +2052,10 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Cameroon-steps-100-cn_b-4-5000-3D-turbo-004-INIT'  # @param{type: 'string'}
+batch_name = 'Cameroon-steps-100-cn_b-4-5000-3D-turbo-german-scenic-INIT-cameroon-06-15k-guidance'  # @param{type: 'string'}
 steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
-clip_guidance_scale = 5000 # 85000  # @param{type: 'number'}
+clip_guidance_scale = 15000 # 85000  # @param{type: 'number'}
 tv_scale = 150 # 1, 150  # @param{type: 'number'}
 range_scale = 450 # 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
@@ -2078,7 +2078,7 @@ video_init_skip_steps = 50  # @param{type: 'integer'}
 
 # IOHAVOC -- "starry night" init image doesn't work well with 3D AFAICT, works gr
 # @markdown ####**Init Image Settings:**
-init_image = "/home/bizon/github/disco-diffusion/init_images/cameroun_border_01.png" # None  # @param{type: 'string'}
+init_image = "/home/bizon/github/disco-diffusion/init_images/cameroun_02.png" # None  # @param{type: 'string'}
 init_scale = 1000  # @param{type: 'integer'}
 skip_steps = 50  # @param{type: 'integer'}
 # @markdown *Make sure you set skip_steps to ~50% of your steps if you want to use an init image.*
@@ -2150,7 +2150,7 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 300  # @param {type:"number"}
+max_frames = 600  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
@@ -2160,7 +2160,7 @@ angle = "0: (1)"    # @param {type:"string"} # in degrees
 zoom = "0:(1.0), "  # @param {type:"string"} # zoom factor 1.x
 translation_x = "0:(0)"
 translation_y = "0:(0)"
-translation_z = "0:(0), 10:(-2), 900:(0)"
+translation_z = "0:(0), 10:(2)"
 rotation_3d_x = "0:(0)"
 rotation_3d_y = "0:(0)"
 rotation_3d_z = "0:(0)"
@@ -2748,7 +2748,7 @@ if intermediate_saves and intermediates_in_subfolder is True:
 
 perlin_init = False  # @param{type: 'boolean'}
 perlin_mode = 'mixed'  # @param ['mixed', 'color', 'gray']
-set_seed = 'random_seed'  # @param{type: 'string'} # '3562262349'
+set_seed = '563189272' # 'random_seed'  # @param{type: 'string'} # '3562262349'
 eta = 0.8  # @param{type: 'number'}
 clamp_grad = True  # @param{type: 'boolean'}
 clamp_max = 0.05  # @param{type: 'number'}
@@ -2811,9 +2811,38 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "Driving on a long forested road, in cameroon",
+        "scenic drive on a long forested road, in cameroon",
+        "front view camera",
+        "a desolate road in a serene, west african landscape",
+        "german romanticism",
         "text:-1"
+        # "multiple exposure"
+    ],
+    150: [
+        "scenic drive on a long forested road, in cameroon",
+        "front view camera",
+        "a desolate road in a serene, west african landscape",
+        "german romanticism",
+        "text:-1"
+        # "multiple exposure"
+    ],
+    300: [
+        "scenic drive on a long forested road, in cameroon",
+        "front view camera",
+        "a desolate road in a serene, west african landscape",
+        "german romanticism",
+        "text:-1"
+        # "multiple exposure"
+    ],
+    450: [
+        "scenic drive on a long forested road, in cameroon",
+        "front view camera",
+        "a desolate road in a serene, west african landscape",
+        "german romanticism",
+        "text:-1"
+        # "multiple exposure"
     ]
+
 }
 
 # 0: [
