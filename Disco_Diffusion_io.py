@@ -2052,7 +2052,7 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Cameroon-steps-100-cn_b-4-5000-3D-turbo-german-scenic-INIT-cameroon-06-15k-guidance'  # @param{type: 'string'}
+batch_name = 'Cameroon-steps-100-cn_b-4-5000-3D-turbo-german-scenic-INIT-cameroon-09-10k-guidance-4000-max-frames'  # @param{type: 'string'}
 steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
 clip_guidance_scale = 15000 # 85000  # @param{type: 'number'}
@@ -2150,7 +2150,7 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 600  # @param {type:"number"}
+max_frames = 4000  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
@@ -2817,32 +2817,7 @@ text_prompts = {
         "german romanticism",
         "text:-1"
         # "multiple exposure"
-    ],
-    150: [
-        "scenic drive on a long forested road, in cameroon",
-        "front view camera",
-        "a desolate road in a serene, west african landscape",
-        "german romanticism",
-        "text:-1"
-        # "multiple exposure"
-    ],
-    300: [
-        "scenic drive on a long forested road, in cameroon",
-        "front view camera",
-        "a desolate road in a serene, west african landscape",
-        "german romanticism",
-        "text:-1"
-        # "multiple exposure"
-    ],
-    450: [
-        "scenic drive on a long forested road, in cameroon",
-        "front view camera",
-        "a desolate road in a serene, west african landscape",
-        "german romanticism",
-        "text:-1"
-        # "multiple exposure"
     ]
-
 }
 
 # 0: [
