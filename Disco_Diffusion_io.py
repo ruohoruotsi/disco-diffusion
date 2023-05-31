@@ -2052,14 +2052,14 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Cameroon-steps-100-cn_b-4-5000-3D-turbo-german-scenic-INIT-cameroon-09-10k-guidance-4000-max-frames'  # @param{type: 'string'}
-steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
+batch_name = 'NYC-steps-250-cn_b-2-3D-turbo-10k-guidance-1000-max-frames'  # @param{type: 'string'}
+steps = 250  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
-clip_guidance_scale = 15000 # 85000  # @param{type: 'number'}
+clip_guidance_scale = 10000 # 85000  # @param{type: 'number'}
 tv_scale = 150 # 1, 150  # @param{type: 'number'}
 range_scale = 450 # 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
-cutn_batches = 4  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
+cutn_batches = 2  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
 skip_augs = False  # @param{type: 'boolean'}
 
 # @markdown ####**Image dimensions to be used for 256x256 models (e.g. pixelart models):**
@@ -2078,7 +2078,7 @@ video_init_skip_steps = 50  # @param{type: 'integer'}
 
 # IOHAVOC -- "starry night" init image doesn't work well with 3D AFAICT, works gr
 # @markdown ####**Init Image Settings:**
-init_image = "/home/bizon/github/disco-diffusion/init_images/cameroun_02.png" # None  # @param{type: 'string'}
+init_image = None # "/home/bizon/github/disco-diffusion/init_images/cameroun_02.png" # None  # @param{type: 'string'}
 init_scale = 1000  # @param{type: 'integer'}
 skip_steps = 50  # @param{type: 'integer'}
 # @markdown *Make sure you set skip_steps to ~50% of your steps if you want to use an init image.*
@@ -2150,7 +2150,7 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 4000  # @param {type:"number"}
+max_frames = 1000  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
@@ -2811,11 +2811,11 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "scenic drive on a long forested road, in cameroon",
-        "front view camera",
-        "a desolate road in a serene, west african landscape",
-        "german romanticism",
-        "text:-1"
+        "Cyberpunk city drive in New York City",
+        "a busy new york street, during rush hour",
+        "Urban, front view camera",
+        "vehicles, rain, mist, late evening",
+        "Matte painting, artstation"
         # "multiple exposure"
     ]
 }
