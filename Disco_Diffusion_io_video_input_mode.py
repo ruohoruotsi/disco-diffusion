@@ -2054,7 +2054,7 @@ if diffusion_model == 'custom':
 # @markdown ####**Basic Settings:**
 batch_name = 'Club-250-cn_b-1-3D-turbo-85k-guidance-100-max-frames-06'  # @param{type: 'string'}
 steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
-width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
+width_height_for_512x512_models = [1280, 720]  # @param{type: 'raw'}
 clip_guidance_scale = 85000 # 85000  # @param{type: 'number'}
 tv_scale = 150 # 1, 150  # @param{type: 'number'}
 range_scale = 450 # 150  # @param{type: 'number'}
@@ -2104,14 +2104,14 @@ createPath(batchFolder)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # @markdown ####**Animation Mode:**
-animation_mode = '3D'  # @param ['None', '2D', '3D', 'Video Input'] {type:'string'}
+animation_mode = 'Video Input'  # @param ['None', '2D', '3D', 'Video Input'] {type:'string'}
 # @markdown *For animation, you probably want to turn `cutn_batches` to 1 to make it quicker.*
 
 
 # @markdown ---
 
 # @markdown ####**Video Input Settings:**
-video_init_path = "init.mp4"  # @param {type: 'string'}
+video_init_path = "/home/bizon/github/disco-diffusion/init_images/Striders_Tyrants_720p_vid_short.mp4" #"init.mp4"  # @param {type: 'string'}
 extract_nth_frame = 2  # @param {type: 'number'}
 persistent_frame_output_in_batch_folder = True  # @param {type: 'boolean'}
 video_init_seed_continuity = False  # @param {type: 'boolean'}
