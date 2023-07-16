@@ -2052,14 +2052,14 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'NYC-steps-250-cn_b-2-3D-turbo-10k-guidance-1000-max-frames'  # @param{type: 'string'}
-steps = 250  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
+batch_name = 'Club-250-cn_b-1-3D-turbo-85k-guidance-100-max-frames-06'  # @param{type: 'string'}
+steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 768]  # @param{type: 'raw'}
-clip_guidance_scale = 10000 # 85000  # @param{type: 'number'}
+clip_guidance_scale = 85000 # 85000  # @param{type: 'number'}
 tv_scale = 150 # 1, 150  # @param{type: 'number'}
 range_scale = 450 # 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
-cutn_batches = 2  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
+cutn_batches = 4  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
 skip_augs = False  # @param{type: 'boolean'}
 
 # @markdown ####**Image dimensions to be used for 256x256 models (e.g. pixelart models):**
@@ -2150,7 +2150,7 @@ if animation_mode == "Video Input":
 # @markdown All rotations are provided in degrees.
 
 key_frames = True  # @param {type:"boolean"}
-max_frames = 1000  # @param {type:"number"}
+max_frames = 100  # @param {type:"number"}
 
 if animation_mode == "Video Input":
     max_frames = len(glob(f'{videoFramesFolder}/*.jpg'))
@@ -2811,13 +2811,13 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "Cyberpunk city drive in New York City",
-        "a busy new york street, during rush hour",
-        "Urban, front view camera",
-        "vehicles, rain, mist, late evening",
-        "Matte painting, artstation"
-        # "multiple exposure"
-    ]
+        "a beautiful painting of sexy people dancing in a night club, glitch art",
+        "Sweaty bodies gyrating to the music",
+        "DJ music, speaker system, dancehall, bladerunner",
+        "summer time, drinks, cocktails at the bar, outrun, retrowave",
+        "foggy, outrun, late night, purple, grey and earth tone color scheme",
+        "trending on artstation, unreal-engine"
+    ],
 }
 
 # 0: [
@@ -2831,26 +2831,6 @@ text_prompts = {
 #     "trending on artstation"
 # ],
 
-# text_prompts = {
-#     0: [
-#         "I realize, it was only my time",
-#         "graphite drawing",
-#         "trending on artstation",
-#         "text:-1"
-#     ],
-#     100: [
-#         "And I don't wanna have to give a damn about you",
-#         "graphite drawing in notebook",
-#         "trending on artstation",
-#         "text:-1"
-#     ],
-#     200: [
-#         "Or your inhibitions",
-#         "graphite drawing in notebook",
-#         "trending on artstation",
-#         "text:-1"
-#     ]
-# }
 
 image_prompts = {
     # 0:['ImagePromptsWorkButArentVeryGood.png:2',],
