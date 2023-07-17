@@ -2052,7 +2052,7 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Club-250-cn_b-1-3D-turbo-85k-guidance-100-max-frames-06'  # @param{type: 'string'}
+batch_name = 'Argonauts-250-cn_b-2-3D-turbo-50-guidance-100-max-frames-08'  # @param{type: 'string'}
 steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 720]  # @param{type: 'raw'}
 clip_guidance_scale = 85000 # 85000  # @param{type: 'number'}
@@ -2066,13 +2066,13 @@ skip_augs = False  # @param{type: 'boolean'}
 width_height_for_256x256_models = [512, 448]  # @param{type: 'raw'}
 
 # @markdown ####**Video Init Basic Settings:**
-video_init_steps = 100  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
-video_init_clip_guidance_scale = 1000  # @param{type: 'number'}
+video_init_steps = 26  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
+video_init_clip_guidance_scale = 50  # @param{type: 'number'}
 video_init_tv_scale = 0.1  # @param{type: 'number'}
 video_init_range_scale = 150  # @param{type: 'number'}
-video_init_sat_scale = 300  # @param{type: 'number'}
-video_init_cutn_batches = 4  # @param{type: 'number'}
-video_init_skip_steps = 50  # @param{type: 'integer'}
+video_init_sat_scale = 30  # @param{type: 'number'}
+video_init_cutn_batches = 2  # @param{type: 'number'}
+video_init_skip_steps = 13  # @param{type: 'integer'} # IOHAVOC this number must be less than video_init_steps
 
 # @markdown ---
 
@@ -2811,26 +2811,10 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "a beautiful painting of sexy people dancing in a night club, glitch art",
-        "Sweaty bodies gyrating to the music",
-        "DJ music, speaker system, dancehall, bladerunner",
-        "summer time, drinks, cocktails at the bar, outrun, retrowave",
-        "foggy, outrun, late night, purple, grey and earth tone color scheme",
-        "trending on artstation, unreal-engine"
+        "a beautiful painting of a serene landscape",
+        "trending on artstation, Impressionism, Studio Ghibli style"
     ],
 }
-
-# 0: [
-#     "However, I'm starting to see this world in the right light",
-#     "graphite drawing in notebook",
-#     "trending on artstation"
-# ],
-# 00: [
-#     "Yet it still gets darker",
-#     "graphite drawing in notebook",
-#     "trending on artstation"
-# ],
-
 
 image_prompts = {
     # 0:['ImagePromptsWorkButArentVeryGood.png:2',],
