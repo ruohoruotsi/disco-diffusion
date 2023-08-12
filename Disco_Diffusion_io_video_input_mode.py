@@ -2052,7 +2052,7 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Argonauts-250-cn_b-2-3D-turbo-50-guidance-100-max-frames-08'  # @param{type: 'string'}
+batch_name = 'Argonauts-250-cn_b-2-3D-turbo-50-guidance-100-max-frames-17-vid_init_frscl_80k_vid_fr_sk_steps_30_scene_changes_no_sat_scale'  # @param{type: 'string'}
 steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 720]  # @param{type: 'raw'}
 clip_guidance_scale = 85000 # 85000  # @param{type: 'number'}
@@ -2069,10 +2069,10 @@ width_height_for_256x256_models = [512, 448]  # @param{type: 'raw'}
 video_init_steps = 26  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
 video_init_clip_guidance_scale = 50  # @param{type: 'number'}
 video_init_tv_scale = 0.1  # @param{type: 'number'}
-video_init_range_scale = 150  # @param{type: 'number'}
-video_init_sat_scale = 30  # @param{type: 'number'}
+video_init_range_scale = 0  # @param{type: 'number'}    # IOHAVOC turn off
+video_init_sat_scale = 0  # @param{type: 'number'}      # IOHAVOC turn off
 video_init_cutn_batches = 2  # @param{type: 'number'}
-video_init_skip_steps = 13  # @param{type: 'integer'} # IOHAVOC this number must be less than video_init_steps
+video_init_skip_steps = 20  # @param{type: 'integer'} # IOHAVOC this number must be less than video_init_steps
 
 # @markdown ---
 
@@ -2203,7 +2203,7 @@ frames_skip_steps = '60%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: '
 # @markdown `frame_scale` tries to guide the new frame to looking like the old one. A good default is 1500.
 video_init_frames_scale = 15000  # @param{type: 'integer'}
 # @markdown `frame_skip_steps` will blur the previous frame - higher values will flicker less but struggle to add enough new detail to zoom into.
-video_init_frames_skip_steps = '70%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
+video_init_frames_skip_steps = '50%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
 
 # ======= VR MODE
 # @markdown ---
@@ -2811,8 +2811,20 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "a beautiful painting of a serene landscape",
-        "trending on artstation, Impressionism, Studio Ghibli style"
+        "two people looking around a beautiful painting of a serene landscape",
+        "trending on artstation, Impressionism style"
+    ],
+    47: [
+        "a statue of a greek soldier on a pedestal, in the background is a serene landscape",
+        "trending on artstation, Impressionism style"
+    ],
+    131: [
+        "two people standing in a beautiful painting of a serene landscape",
+        "trending on artstation, Impressionism style"
+    ],
+    154: [
+        "a statue of a greek soldier on a pedestal, in the background is a serene landscape",
+        "trending on artstation, Impressionism style"
     ],
 }
 
