@@ -1164,7 +1164,7 @@ def do_run():
 
         if args.animation_mode == "Video Input":
             init_scale = args.video_init_frames_scale
-            skip_steps = args.calc_frames_skip_steps
+            skip_steps = args.calc_frames_skip_steps    # IOHAVOC, this is derived from frame_skip_steps (not video_init_frame_skip_steps)
             if not video_init_seed_continuity:
                 seed += 1
             if video_init_flow_warp:
@@ -2052,7 +2052,7 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Argonauts-250-cn_b-2-3D-turbo-50-guidance-100-max-frames-17-vid_init_frscl_80k_vid_fr_sk_steps_30_scene_changes_no_sat_scale'  # @param{type: 'string'}
+batch_name = 'Argonauts-250-cn_b-2-3D-turbo-50-guidance-100-max-frames-28-vid_init_flow_warp_FALSE'  # @param{type: 'string'}
 steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 720]  # @param{type: 'raw'}
 clip_guidance_scale = 85000 # 85000  # @param{type: 'number'}
@@ -2072,7 +2072,7 @@ video_init_tv_scale = 0.1  # @param{type: 'number'}
 video_init_range_scale = 0  # @param{type: 'number'}    # IOHAVOC turn off
 video_init_sat_scale = 0  # @param{type: 'number'}      # IOHAVOC turn off
 video_init_cutn_batches = 2  # @param{type: 'number'}
-video_init_skip_steps = 20  # @param{type: 'integer'} # IOHAVOC this number must be less than video_init_steps
+video_init_skip_steps = 24  # @param{type: 'integer'} # IOHAVOC this number must be less than video_init_steps
 
 # @markdown ---
 
@@ -2116,11 +2116,11 @@ extract_nth_frame = 2  # @param {type: 'number'}
 persistent_frame_output_in_batch_folder = True  # @param {type: 'boolean'}
 video_init_seed_continuity = False  # @param {type: 'boolean'}
 # @markdown #####**Video Optical Flow Settings:**
-video_init_flow_warp = True  # @param {type: 'boolean'}
+video_init_flow_warp = False  # @param {type: 'boolean'}  # IOHAVOC --- this is what has been fucking up your ISH!!!
 # Call optical flow from video frames and warp prev frame with flow
 video_init_flow_blend = 0.999  # @param {type: 'number'} #0 - take next frame, 1 - take prev warped frame
 video_init_check_consistency = False  # Insert param here when ready
-video_init_blend_mode = "optical flow"  # @param ['None', 'linear', 'optical flow']
+video_init_blend_mode = "None"  # @param ['None', 'linear', 'optical flow']  # IOHAVOC no flow_warp means blend mode must NOT be 'optical flow'
 # Call optical flow from video frames and warp prev frame with flow
 if animation_mode == "Video Input":
     if persistent_frame_output_in_batch_folder or (not is_colab):  # suggested by Chris the Wizard#8082 at discord
@@ -2197,13 +2197,16 @@ if turbo_mode and animation_mode != '3D':
 frames_scale = 2000  # @param{type: 'integer'}
 # @markdown `frame_skip_steps` will blur the previous frame - higher values will flicker less but struggle to add
 # enough new detail to zoom into.
-frames_skip_steps = '60%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
+frames_skip_steps = '80%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
+# IOHAVOC ^^^^^ THIS IS SUSPICIOUSLY relevant  it is NOT equal to video_init_frames_skip_steps above, even though in
+# the code,  frames_skip_steps is initialized to with video_init_frames_skip_steps. need to debug and understand their
+# differences. @80% trends to black quick @ 10% is hyper-colored TRASH
 
 # @markdown ####**Video Init Coherency Settings:**
 # @markdown `frame_scale` tries to guide the new frame to looking like the old one. A good default is 1500.
-video_init_frames_scale = 15000  # @param{type: 'integer'}
+video_init_frames_scale = 15000  # @param{type: 'integer'} #IOHAVOC, doesn't have much af an effect 15000 vs 1500
 # @markdown `frame_skip_steps` will blur the previous frame - higher values will flicker less but struggle to add enough new detail to zoom into.
-video_init_frames_skip_steps = '50%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
+video_init_frames_skip_steps = '20%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
 
 # ======= VR MODE
 # @markdown ---
@@ -2811,21 +2814,14 @@ transformation_percent = [0.09]  # @param
 # It'll tend to work a lot better!
 text_prompts = {
     0: [
-        "two people looking around a beautiful painting of a serene landscape",
-        "trending on artstation, Impressionism style"
-    ],
-    47: [
-        "a statue of a greek soldier on a pedestal, in the background is a serene landscape",
-        "trending on artstation, Impressionism style"
-    ],
-    131: [
-        "two people standing in a beautiful painting of a serene landscape",
-        "trending on artstation, Impressionism style"
-    ],
-    154: [
-        "a statue of a greek soldier on a pedestal, in the background is a serene landscape",
-        "trending on artstation, Impressionism style"
-    ],
+        "a beautiful painting by Thomas Kinkade:4",
+        "trending on artstation, Impressionism style:2",
+        "in full color:6",
+        "Dof:-1",
+        "Blur:-1",
+        "color red:-3",
+        "color black:-3"
+    ]
 }
 
 image_prompts = {
@@ -2873,6 +2869,9 @@ if retain_overwritten_frames:
     retainFolder = f'{batchFolder}/retained'
     createPath(retainFolder)
 
+# IOHAVOC frames_skip_steps here IS used (NOT video_init_frames_skip_steps) to get skip_step_ratio, for how much each
+# frame should look like the init_image (from each video frame) .. no we need to figure out what
+# video_init_frames_skip_steps is doing and where
 skip_step_ratio = int(frames_skip_steps.rstrip("%")) / 100
 calc_frames_skip_steps = math.floor(steps * skip_step_ratio)
 
