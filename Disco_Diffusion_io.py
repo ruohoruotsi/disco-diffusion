@@ -4,7 +4,7 @@ target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.
 """
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Disco Diffusion v5.61 - Now with portrait_generator_v001
+# Disco Diffusion v5.7 - Now with MiDaS (3D mode) not being broken
 
 Disco Diffusion - http://discodiffusion.com/ , https://github.com/alembics/disco-diffusion
 
@@ -309,6 +309,9 @@ if not skip_for_run_all:
 
       Correct progress bars issue caused by recent Google Colab environment changes
       Adjust 512x512 diffusion model download URI priority due to issues with the previous primary source
+
+  v5.7 Update: Dec 31st 2022 - Steffen Moelter (with minor colab-convert integration by gandamu)
+      Clone MiDaS v3 specifically. This fixes 3D mode. It had been broken since MiDaS v3.1 introduced an incompatibility
     '''
     )
 
@@ -401,12 +404,14 @@ else:
 
 
 # @title 1.2 Prepare Folders
-def gitclone(url, targetdir=None):
-    if targetdir:
-        res = subprocess.run(['git', 'clone', url, targetdir], stdout=subprocess.PIPE).stdout.decode('utf-8')
-    else:
-        res = subprocess.run(['git', 'clone', url], stdout=subprocess.PIPE).stdout.decode('utf-8')
-    print(res)
+def gitclone(url, target_dir=None, branch_arg=None):
+    run_args = ['git', 'clone']
+    if branch_arg:
+        run_args.extend(['-b', branch_arg])
+    run_args.append(url)
+    if target_dir:
+        run_args.append(target_dir)
+    res = subprocess.run(run_args, stdout=subprocess.PIPE).stdout.decode('utf-8')
 
 
 def pipi(modulestr):
@@ -502,7 +507,7 @@ try:
     from midas.dpt_depth import DPTDepthModel
 except:
     if not os.path.exists('MiDaS'):
-        gitclone("https://github.com/isl-org/MiDaS.git")
+        gitclone("https://github.com/isl-org/MiDaS.git", branch_arg="v3")
     if not os.path.exists('MiDaS/midas_utils.py'):
         shutil.move('MiDaS/utils.py', 'MiDaS/midas_utils.py')
     if not os.path.exists(f'{model_path}/dpt_large-midas-2f21e586.pt'):
