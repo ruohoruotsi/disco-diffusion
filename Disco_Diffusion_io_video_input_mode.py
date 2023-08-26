@@ -2052,7 +2052,7 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Argonauts-vid_init_flow_warp_FALSE_nth_frame_3_fss_50_vifss_80_13_cfg_85k_viss_5_building001'  # @param{type: 'string'}
+batch_name = 'Argonauts-vid_init_flow_warp_FALSE_nth_frame_3_fss_50_vifss_80_14_cfg_85k_viss_10'  # @param{type: 'string'}
 steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 720]  # @param{type: 'raw'}
 clip_guidance_scale = 85000 # 85000  # @param{type: 'number'}
@@ -2816,7 +2816,7 @@ text_prompts = {
 
     0: [
         "a beautiful painting of a serene landscape,",
-        "Slenderman",
+        "Lovecraftian",
     ]
     # 0: [
     #     "a beautiful painting by Thomas Kinkade:4",
