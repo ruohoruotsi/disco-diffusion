@@ -2052,27 +2052,27 @@ if diffusion_model == 'custom':
 # 3. Basic Settings
 """
 # @markdown ####**Basic Settings:**
-batch_name = 'Argonauts-250-cn_b-2-3D-turbo-50-guidance-100-max-frames-28-vid_init_flow_warp_FALSE'  # @param{type: 'string'}
+batch_name = 'Argonauts-vid_init_flow_warp_FALSE_nth_frame_3_fss_50_vifss_80_13_cfg_85k_viss_5_building001'  # @param{type: 'string'}
 steps = 1000  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true} # IOHAVOC_GOFAST # 1000
 width_height_for_512x512_models = [1280, 720]  # @param{type: 'raw'}
 clip_guidance_scale = 85000 # 85000  # @param{type: 'number'}
 tv_scale = 150 # 1, 150  # @param{type: 'number'}
 range_scale = 450 # 150  # @param{type: 'number'}
 sat_scale = 0  # @param{type: 'number'}
-cutn_batches = 4  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
+cutn_batches = 1  # @param{type: 'number'} # IOHAVOC_GOFAST # 4
 skip_augs = False  # @param{type: 'boolean'}
 
 # @markdown ####**Image dimensions to be used for 256x256 models (e.g. pixelart models):**
 width_height_for_256x256_models = [512, 448]  # @param{type: 'raw'}
 
 # @markdown ####**Video Init Basic Settings:**
-video_init_steps = 26  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
-video_init_clip_guidance_scale = 50  # @param{type: 'number'}
+video_init_steps = 25  # @param [25,50,100,150,250,500,1000]{type: 'raw', allow-input: true}
+video_init_clip_guidance_scale = 85000  # @param{type: 'number'}
 video_init_tv_scale = 0.1  # @param{type: 'number'}
 video_init_range_scale = 0  # @param{type: 'number'}    # IOHAVOC turn off
 video_init_sat_scale = 0  # @param{type: 'number'}      # IOHAVOC turn off
-video_init_cutn_batches = 2  # @param{type: 'number'}
-video_init_skip_steps = 24  # @param{type: 'integer'} # IOHAVOC this number must be less than video_init_steps
+video_init_cutn_batches = 1  # @param{type: 'number'}
+video_init_skip_steps = 10  # @param{type: 'integer'} # IOHAVOC this number must be less than video_init_steps
 
 # @markdown ---
 
@@ -2111,8 +2111,8 @@ animation_mode = 'Video Input'  # @param ['None', '2D', '3D', 'Video Input'] {ty
 # @markdown ---
 
 # @markdown ####**Video Input Settings:**
-video_init_path = "/home/bizon/github/disco-diffusion/init_images/Striders_Tyrants_720p_vid_short.mp4" #"init.mp4"  # @param {type: 'string'}
-extract_nth_frame = 2  # @param {type: 'number'}
+video_init_path = "/home/bizon/github/disco-diffusion/init_images/Striders_Tyrants_3s.mp4" #"init.mp4"  # @param {type: 'string'}
+extract_nth_frame = 3  # @param {type: 'number'}
 persistent_frame_output_in_batch_folder = True  # @param {type: 'boolean'}
 video_init_seed_continuity = False  # @param {type: 'boolean'}
 # @markdown #####**Video Optical Flow Settings:**
@@ -2197,16 +2197,16 @@ if turbo_mode and animation_mode != '3D':
 frames_scale = 2000  # @param{type: 'integer'}
 # @markdown `frame_skip_steps` will blur the previous frame - higher values will flicker less but struggle to add
 # enough new detail to zoom into.
-frames_skip_steps = '80%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
+frames_skip_steps = '50%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
 # IOHAVOC ^^^^^ THIS IS SUSPICIOUSLY relevant  it is NOT equal to video_init_frames_skip_steps above, even though in
 # the code,  frames_skip_steps is initialized to with video_init_frames_skip_steps. need to debug and understand their
-# differences. @80% trends to black quick @ 10% is hyper-colored TRASH
+# differences. @80% trends to black quick @ 10% is hyper-colored TRASH IN WARP MODE ... linear mode is diff
 
 # @markdown ####**Video Init Coherency Settings:**
 # @markdown `frame_scale` tries to guide the new frame to looking like the old one. A good default is 1500.
-video_init_frames_scale = 15000  # @param{type: 'integer'} #IOHAVOC, doesn't have much af an effect 15000 vs 1500
+video_init_frames_scale = 1500  # @param{type: 'integer'} #IOHAVOC, doesn't have much af an effect 15000 vs 1500
 # @markdown `frame_skip_steps` will blur the previous frame - higher values will flicker less but struggle to add enough new detail to zoom into.
-video_init_frames_skip_steps = '20%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
+video_init_frames_skip_steps = '80%'  # @param ['40%', '50%', '60%', '70%', '80%'] {type: 'string'}
 
 # ======= VR MODE
 # @markdown ---
@@ -2813,15 +2813,20 @@ transformation_percent = [0.09]  # @param
 # try adding "#pixelart" to the end of the prompt for a stronger effect.
 # It'll tend to work a lot better!
 text_prompts = {
+
     0: [
-        "a beautiful painting by Thomas Kinkade:4",
-        "trending on artstation, Impressionism style:2",
-        "in full color:6",
-        "Dof:-1",
-        "Blur:-1",
-        "color red:-3",
-        "color black:-3"
+        "a beautiful painting of a serene landscape,",
+        "Slenderman",
     ]
+    # 0: [
+    #     "a beautiful painting by Thomas Kinkade:4",
+    #     "trending on artstation, Impressionism style:2",
+    #     "in full color:6",
+    #     "Dof:-1",
+    #     "Blur:-1",
+    #     "color red:-3",
+    #     "color black:-3"
+    # ]
 }
 
 image_prompts = {
